@@ -198,11 +198,11 @@ function updateWeatherDisplay(data) {
         <div class="current-temp">
           <p class="current-condition" id="description">${current.condition.text}</p>
           <p class="current-condition" id="humidity">Humidity: ${Math.round(current.humidity)}%</p>
-          <div class="current-wind-speed">Wind Speed: ${Math.round(current.wind_kph)} km/h <img src="images/icons/Cycle.svg" class="wind-icon" style="animation-duration: ${10 / (current.wind_kph || 1)}s;"/></div>
+          <div class="current-wind-speed">Wind Speed: ${Math.round(current.wind_kph)} km/h <img src="Images/icons/Cycle.svg" class="wind-icon" style="animation-duration: ${10 / (current.wind_kph || 1)}s;"/></div>
         </div>
         <div class="current-time-container">
           <p class="current-time" id="time">${formatCurrentTime(current.last_updated)}</p>
-          <div class="city current-city" id="location">${location.name}, ${location.country} <img src="images/icons/globe.svg" alt="Icon"/></div>
+          <div class="city current-city" id="location">${location.name}, ${location.country} <img src="Images/icons/globe.svg" alt="Icon"/></div>
         </div>
       </div>
   `;
@@ -296,7 +296,7 @@ function updateHourlyForecast(data) {
             <h2>${temperatureUnit}<h2>
           </div>
           <p>${hour.condition.text}</p>
-          <div class="hour-humidity">${Math.round(hour.wind_speed)} km/h <img src="images/icons/Cycle.svg" class="word-icon" style="animation-duration: ${10 / (hour.wind_kph || 1)}s;"/></div>
+          <div class="hour-humidity">${Math.round(hour.wind_speed)} km/h <img src="Images/icons/Cycle.svg" class="word-icon" style="animation-duration: ${10 / (hour.wind_kph || 1)}s;"/></div>
           <div class="hour-humidity"><img src="Images/icons/Drop.svg" alt="" class="word-icon">${Math.round(hour.humidity)}%</div>
         </div>
       `;
@@ -329,7 +329,7 @@ function updateFiveDayForecast({ city, dailyData }) {
               <h1>${temperatureUnit}<h1>
             </div>
             <p>${day.day.condition.text}</p>
-            <div class="hour-humidity">${Math.round(day.day.maxwind_kph)} km/h <img src="images/icons/Cycle.svg" class="word-icon" style="animation-duration: ${10 / (day.day.maxwind_kph || 1)}s;"/></div>
+            <div class="hour-humidity">${Math.round(day.day.maxwind_kph)} km/h <img src="Images/icons/Cycle.svg" class="word-icon" style="animation-duration: ${10 / (day.day.maxwind_kph || 1)}s;"/></div>
             <div class="hour-humidity"><img src="Images/icons/Drop.svg" alt="" class="word-icon">${Math.round(day.day.avghumidity) || 'N/A'}%</div>
             <br>
             <p class="city">${city}</p>
