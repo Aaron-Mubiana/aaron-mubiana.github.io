@@ -70,13 +70,13 @@
 
 #hideSearchbar{
   background-color: rgb(234, 234, 234);
-  background-image: url("../images/icons/Cancel.svg");
+  background-image: url("../Images/icons/Cancel.svg");
   background-size: 24px;
 }
 
 #hideSearchbar.light-mode{
   background-color: rgb(54, 54, 54);
-  background-image: url("../images/icons/Cancel\ light.svg");
+  background-image: url("../Images/icons/Cancel\ light.svg");
   background-size: 24px;
   border: solid rgba(255, 255, 255, 0.187) 1.5px;
 }
@@ -99,12 +99,12 @@
 
 .search-bar .search-button{
 border-left: solid black 1.5px;
-background-image: url("../images/icons/search\ icon.jpg");
+background-image: url("../Images/icons/search\ icon.jpg");
 }
 
 .search-bar.light-mode .search-button{
   border-left: solid rgba(255, 255, 255, 0.753) 1.5px;
-    background-image: url("../images/icons/search\ icon.png");
+    background-image: url("../Images/icons/search\ icon.png");
 }
 
 
