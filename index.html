@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Weather</title>
+  <link rel="shortcut icon" href="Images/icons/Temperature.svg" />
+  <link rel="stylesheet" href="css/home.css" />
+  <link rel="stylesheet" href="css/sidebar.css" />
+  <link rel="stylesheet" href="css/general.css" />
+  <link rel="stylesheet" href="css/footer.css" />
+  <link rel="stylesheet" href="css/theme.css" />
+  <link rel="stylesheet" href="css/header.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <script src="js/header.js" defer></script>
+</head>
+
+<body>
+
+  <div class="error-message" id="error" style="opacity: 0; top: -100px;">
+    There was an error while fetching weather data. <br>
+    Check your internet connection and try again.
+  </div>
+
+  <div class="success-message" id="success" style="opacity: 0; bottom: -200px;">
+    <img src="Images/icons/check.svg" alt="Check">
+    City has been saved sucessfuly.
+  </div>
+
+  <div class="theme-toggle-message" id="themeMessage" style="opacity: 0; right: -400px;">
+    <img src="Images/icons/light mode bulb.svg" alt="Check">
+    Light mode enabled
+  </div>
+
+  <div class="unit-toggle-message" id="unitMessage" style="opacity: 0; top: -100px;">
+    <h2><sup>o</sup>C</h2>&nbsp;&nbsp;&nbsp;
+    Units changed to celcius
+  </div>
+
+  <button onclick="location.href='#';" class="dropdown-bar-container" id="toggleSideBar" title="Logo">Aa</button>
+
+  <div class="sidebar" id="sideBar">
+
+    <button id="toggleSearchbar" title="Search">
+      <div class="sidebar-link">
+        <img class="search-icon sidebar-icon" src="Images/icons/search icon.png" alt="">
+        <p>Search</p>
+      </div>
+    </button>
+    <button onclick="location.href='index.html';" id="home-button" title="Home">
+      <div class="sidebar-link">
+        <img class="sidebar-icon" src="Images/icons/Home.svg" alt="Home">
+        <p>Home</p>
+      </div>
+    </button>
+    <button id="saveCityButton" title="Save City">
+      <div class="sidebar-link">
+        <img class="sidebar-icon" src="Images/icons/Snowflake.svg" alt="Snow Level">
+        <p>Save&nbsp;City</p>
+      </div>
+    </button>
+    <button onclick="location.href='#';" title="Convert" id="toggleUnits">
+      <div class="sidebar-link">
+        <img class="sidebar-icon" src="Images/icons/Drop orange.svg" alt="Water Level">
+        <p>Units</p>
+      </div>
+    </button>
+    <button id="viewSavedCitiesButton" title="Saved Cities">
+      <div class="sidebar-link">
+        <img class="sidebar-icon" src="Images/icons/Temperature.svg" alt="Temp">
+        <p>Saved&nbsp;Cities</p>
+      </div>
+    </button>
+    <button id="toggle-theme" title="Theme">
+      <div class="sidebar-link">
+        <img class="sidebar-icon" src="Images/icons/T shirt.svg" alt="Theme">
+        <p>Theme</p>
+      </div>
+    </button>
+    <button onclick="location.href='#';" title="Settings">
+      <div class="sidebar-link">
+        <img class="sidebar-icon" src="Images/icons/settings.svg" alt="Settings">
+        <p>Settings</p>
+      </div>
+    </button>
+    <button onclick="location.href='#bottomContainer';" title="About">
+      <div class="sidebar-link">
+        <img class="sidebar-icon" src="Images/icons/Location.svg" alt="About">
+        <p>Contact</p>
+      </div>
+    </button>
+    <button onclick="shareContent()" title="Share">
+      <div class="sidebar-link">
+        <img class="sidebar-icon" src="Images/icons/share.svg" alt="Share">
+        <p>Share</p>
+      </div>
+    </button>
+  </div>
+
+  <div id="fallback" style="display: none;">
+    <button id="closePasteWindow" class="close-window"></button>
+    <p>Share the fun.</p>
+    <input type="text" id="share-url" readonly>
+    <button onclick="copyToClipboard()" class="copy-button">Copy</button>
+  </div>
+
+  <div class="search-container" id="searchBar">
+    <div method="post" class="search-bar">
+      <input class="search-box" type="search" placeholder="Search city, state, town..." id="searchBox" name="serach">
+      <button class="search-button" type="submit" id="searchButton"></button>
+      <div id="suggestions"></div>
+    </div>
+    <button id="hideSearchbar"></button>
+  </div>
+
+
+  <div class="main-weather-container" id="content">
+
+    <div class="current-weather-tile-container" id="currentWeather">
+      <div class="current-weather-tile">
+        <img src="Images/background.jpg" alt="" class="current-background">
+        <div class="current-day">
+          <p id="day">Today</p>
+        </div>
+
+        <div class="current-temperature">
+          <div class="temp-unit">
+            <p id="temperature">0<sup>o</sup></sup>
+            <span class="tempUnit">C</span>
+          </div>
+          <div id="weather-icon" class="fas fa-sun"></div>
+        </div>
+
+
+        <div class="current-temp">
+          <p class="current-condition" id="description">Condition</p>
+          <p class="current-condition" id="humidity">Humidity: 0%</p>
+          <div class="current-wind-speed" id="wind">Wind Speed: 0m/s <img src="Images/icons/Cycle.svg" alt="Icon"></div>
+        </div>
+        <div class="current-time-container">
+          <p class="current-time" id="time">Time</p>
+          <div class="city current-city" id="location">Location <img src="Images/icons/globe.svg" alt=""></div>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="today-hourly-container">
+      <h3 class="tile-title">Hourly Forecast</h3>
+      <div id="hourlyForecast" class="today-hourly">
+        <div class="hour-tile">
+          <h5>00:00:00 AM</h5>
+          <br>
+          <div class="weather-icon"><i class="fas fa-sun"></i></div>
+          <br>
+          <h2>0°C</h2>
+          <p>clear sky</p>
+          <div class="hour-humidity"><img src="Images/icons/Cycle.svg" alt="" class="word-icon">0%</div>
+          <div class="hour-humidity"><img src="Images/icons/Drop.svg" alt="" class="word-icon">0%</div>
+        </div>
+
+        <div class="hour-tile">
+          <h5>00:00:00 AM</h5>
+          <br>
+          <div class="weather-icon"><i class="fas fa-sun"></i></div>
+          <br>
+          <h2>0°C</h2>
+          <p>clear sky</p>
+          <div class="hour-humidity"><img src="Images/icons/Cycle.svg" alt="" class="word-icon">0%</div>
+          <div class="hour-humidity"><img src="Images/icons/Drop.svg" alt="" class="word-icon">0%</div>
+        </div>
+
+        <div class="hour-tile">
+          <h5>00:00:00 AM</h5>
+          <br>
+          <div class="weather-icon"><i class="fas fa-sun"></i></div>
+          <br>
+          <h2>0°C</h2>
+          <p>clear sky</p>
+          <div class="hour-humidity"><img src="Images/icons/Cycle.svg" alt="" class="word-icon">0%</div>
+          <div class="hour-humidity"><img src="Images/icons/Drop.svg" alt="" class="word-icon">0%</div>
+        </div>
+
+        <div class="hour-tile">
+          <h5>00:00:00 AM</h5>
+          <br>
+          <div class="weather-icon"><i class="fas fa-sun"></i></div>
+          <br>
+          <h2>0°C</h2>
+          <p>clear sky</p>
+          <div class="hour-humidity"><img src="Images/icons/Cycle.svg" alt="" class="word-icon">0%</div>
+          <div class="hour-humidity"><img src="Images/icons/Drop.svg" alt="" class="word-icon">0%</div>
+        </div>
+
+        <div class="hour-tile">
+          <h5>00:00:00 AM</h5>
+          <br>
+          <div class="weather-icon"><i class="fas fa-sun"></i></div>
+          <br>
+          <h2>0°C</h2>
+          <p>clear sky</p>
+          <div class="hour-humidity"><img src="Images/icons/Cycle.svg" alt="" class="word-icon">0%</div>
+          <div class="hour-humidity"><img src="Images/icons/Drop.svg" alt="" class="word-icon">0%</div>
+        </div>
+
+        <div class="hour-tile">
+          <h5>00:00:00 AM</h5>
+          <br>
+          <div class="weather-icon"><i class="fas fa-sun"></i></div>
+          <br>
+          <h2>0°C</h2>
+          <p>clear sky</p>
+          <div class="hour-humidity"><img src="Images/icons/Cycle.svg" alt="" class="word-icon">0%</div>
+          <div class="hour-humidity"><img src="Images/icons/Drop.svg" alt="" class="word-icon">0%</div>
+        </div>
+
+      </div>
+
+    </div>
+
+     <h3 class="tile-title">5-Day Forecast</h3>
+    <div id="fiveDayForecast" class="five-day-forecast weather-tile-container">
+
+      <div class="weather-tile">
+        <br>
+        <h3 id="day">Day 5</h3>
+        <br>
+        <h5 class="current-time">00:00 AM</h5>
+        <br>
+        <div class="weather-icon"><i
+            class="fas weather-condition-icon ${getWeatherIcon(day.day.condition.icon)}"></i></i></div>
+        <br>
+        <h1>0°C</h1>
+        <br>
+        <p>Clear Sky</p>
+        <div class="hour-humidity">0 km/h <img src="images/icons/Cycle.svg" class="word-icon" alt="speed"></div>
+        <div class="hour-humidity"><img src="Images/icons/Drop.svg" alt="" class="word-icon">0%</div>
+        <br>
+        <p class="city">Location</p>
+      </div>
+
+
+      <div class="weather-tile">
+        <br>
+        <h3 id="day">Day 5</h3>
+        <br>
+        <h5 class="current-time">00:00 AM</h5>
+        <br>
+        <div class="weather-icon"><i
+            class="fas weather-condition-icon ${getWeatherIcon(day.day.condition.icon)}"></i></i></div>
+        <br>
+        <h1>0°C</h1>
+        <br>
+        <p>Clear Sky</p>
+        <div class="hour-humidity">0 km/h <img src="images/icons/Cycle.svg" class="word-icon" alt="speed"></div>
+        <div class="hour-humidity"><img src="Images/icons/Drop.svg" alt="" class="word-icon">0%</div>
+        <br>
+        <p class="city">Location</p>
+      </div>
+
+      <div class="weather-tile">
+        <br>
+        <h3 id="day">Day 5</h3>
+        <br>
+        <h5 class="current-time">00:00 AM</h5>
+        <br>
+        <div class="weather-icon"><i
+            class="fas weather-condition-icon ${getWeatherIcon(day.day.condition.icon)}"></i></i></div>
+        <br>
+        <h1>0°C</h1>
+        <br>
+        <p>Clear Sky</p>
+        <div class="hour-humidity">0 km/h <img src="images/icons/Cycle.svg" class="word-icon" alt="speed"></div>
+        <div class="hour-humidity"><img src="Images/icons/Drop.svg" alt="" class="word-icon">0%</div>
+        <br>
+        <p class="city">Location</p>
+      </div>
+
+      <div class="weather-tile">
+        <br>
+        <h3 id="day">Day 5</h3>
+        <br>
+        <h5 class="current-time">00:00 AM</h5>
+        <br>
+        <div class="weather-icon"><i
+            class="fas weather-condition-icon ${getWeatherIcon(day.day.condition.icon)}"></i></i></div>
+        <br>
+        <h1>0°C</h1>
+        <br>
+        <p>Clear Sky</p>
+        <div class="hour-humidity">0 km/h <img src="images/icons/Cycle.svg" class="word-icon" alt="speed"></div>
+        <div class="hour-humidity"><img src="Images/icons/Drop.svg" alt="" class="word-icon">0%</div>
+        <br>
+        <p class="city">Location</p>
+      </div>
+
+    </div>
+
+    <div class="main-saved-cities-container">
+      <div class="saved-cities-header">
+        <h3>Saved Cities</h3>
+        <button id="hideSavedCitiesButton">Hide</button>
+      </div>
+
+      <div id="savedCitiesContainer" class="saved-cities-container"></div>
+    </div>
+
+
+
+
+    <div class="bottom-container" id="bottomContainer">
+
+      <div class="information-container">
+
+        <div class="contact-us-container">
+          <h4 class="bottom-title">Contact Us</h4>
+          <a href="#" class="contact-us">aaronmubby@outlook.com</a>
+          <a href="#" class="contact-us">0771818617</a>
+          <a href="#" class="contact-us">Feedback</a>
+          <a href="#" class="contact-us">Customer Service</a>
+          <a href="#" class="contact-us">Terms and Conditions</a>
+        </div>
+
+        <div class="contact-us-container">
+          <h4 class="bottom-title">Services</h4>
+          <a href="#" class="contact-us">aaronmubby@outlook.com</a>
+          <a href="#" class="contact-us">0771818617</a>
+          <a href="#" class="contact-us">Feedback</a>
+          <a href="#" class="contact-us">Customer Service</a>
+          <a href="#" class="contact-us">Terms and Conditions</a>
+        </div>
+
+        <div class="contact-us-container">
+          <h4 class="bottom-title">Quick Links</h4>
+          <ul>
+            <li><a class="contact-us" href="http://www.icuzambia.net">ICU Zambia</a></li>
+            <li><a class="contact-us" href="https://www.zrdc.org">ZRDC</a></li>
+            <li><a class="contact-us" href="http://www.icuzambia.net">Font Awesome</a></li>
+            <li><a class="contact-us" href="https://www.zrdc.org">Open Weather</a></li>
+          </ul>
+        </div>
+        
+      </div>
+
+      <div class="socials-container">
+        <div class="socials">
+          <a href="http://www.icuzambia.net" class="social-link link1"><img title="ICU Zambia"
+              src="images/icons/ICU logo.png" alt="ICU Zambia" class="social-button button1">ICU Zambia</a>
+          <a href="https://www.zrdc.org" class="social-link link2" link2><img title="ZRDC" src="images/icons/zrdc.png" alt="ZRDC" class="social-button button2">ZRDC</a>
+          <a href="https://fontawesome.com/" class="social-link link3"><img title="Font Awesome"
+              src="images/icons/font awesome.png" alt="Font Awesome" class="social-button button3">Font Awesome</a>
+          <a href="https://openweathermap.org/" class="social-link link4"><img title="Open Weather"
+              src="images/icons/open weather.png" alt="Open Weather" class="social-button button4">Open Weather</a>
+          <button onclick="shareContent()" class="social-link link5"><img title="Invite" src="images/icons/share.svg" alt="Invite" class="social-button button5">Share Link</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+
+  <div class="footer-container">
+    <foooter class="footer" id="footer">
+
+      <div class="copyright">
+        <td align="middle"><span class="copyright">&#169; 2024 Kaoma Weather <br> All Rights Reserved. Designed and
+            Maintained By Aaron&nbsp;Mubiana, SIN:&nbsp;2308322742</td>
+      </div>
+
+    </foooter>
+  </div>
+
+  <script>
+
+    function shareContent() {
+      if (navigator.share) {
+        navigator.share({
+          title: 'Share Location',
+          text: 'Hello there, here is my location',
+          url: window.location.href
+        }).then(() => {
+          console.log('Thanks for sharing!');
+        }).catch((error) => {
+          console.error('Error sharing:', error);
+        });
+      } else {
+        showFallback();
+      }
+    }
+
+    function showFallback() {
+      const fallback = document.getElementById('fallback');
+      const shareUrl = document.getElementById('share-url');
+      shareUrl.value = window.location.href;
+      fallback.style.display = 'flex';
+    }
+
+    function copyToClipboard() {
+      const closePasteWindow = document.getElementById('closePasteWindow');
+      const shareUrl = document.getElementById('share-url');
+      shareUrl.select();
+      document.execCommand('copy');
+      alert('Link copied to clipboard!');
+      fallback.style.display = 'none';
+    }
+
+    function closePasteWindow() {
+      const closePasteWindow = document.getElementById('closePasteWindow');
+      closePasteWindow.addEventListener('click', function () {
+        fallback.style.display = 'none';
+      })
+    }
+    closePasteWindow();
+
+  </script>
+
+
+  <script src="js/weather api.js" defer></script>
+  <script src="js/script.js" defer></script>
+  <script src="js/utils.js" defer></script>
+
+</body>
+
+</html>

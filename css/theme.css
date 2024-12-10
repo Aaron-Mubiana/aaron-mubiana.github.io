@@ -1,0 +1,274 @@
+@media (max-width: 768px) {
+
+  .dropdown-bar {
+    background-color: black;
+    transition: all 0.35s;
+  }
+
+  .dropdown-bar.light-mode {
+    background-color: rgb(0, 0, 0);
+  }
+
+  .bottom-container{
+    margin: 5px 0px;
+  }
+
+  .bottom-container.active{
+    margin: 5px 0px;
+  }
+}
+
+@media (min-width: 768.1px) {
+
+
+  .dropdown-bar {
+    background-color: black;
+    transition: all 0.35s;
+  }
+
+  .dropdown-bar.light-mode {
+    background-color: rgb(0, 0, 0);
+  }
+
+  .bottom-container{
+    margin: 5px 0px 0px 0px;
+  }
+
+}
+
+ 
+
+.search-bar{
+  background-color: rgb(234, 234, 234);
+}
+
+.search-bar.light-mode{
+  background-color: rgb(54, 54, 54);
+  border: solid rgba(255, 255, 255, 0.187) 1.5px;
+}
+
+.search-bar #suggestions{
+  background-color: white;
+  color: black;
+}
+
+.search-bar #suggestions div:hover{
+  background-color: rgb(240, 240, 240);
+}
+
+.search-bar.light-mode #suggestions div:hover{
+  background-color: rgb(44, 44, 44);
+  color: rgb(232, 232, 232);
+}
+
+.search-bar.light-mode #suggestions{
+  background-color: rgb(54, 54, 54);
+  border: solid rgba(255, 255, 255, 0.187) 1.5px;
+  color: white;
+}
+
+
+#hideSearchbar{
+  background-color: rgb(234, 234, 234);
+  background-image: url("../images/icons/Cancel.svg");
+  background-size: 24px;
+}
+
+#hideSearchbar.light-mode{
+  background-color: rgb(54, 54, 54);
+  background-image: url("../images/icons/Cancel\ light.svg");
+  background-size: 24px;
+  border: solid rgba(255, 255, 255, 0.187) 1.5px;
+}
+
+.search-bar .search-box::placeholder{
+  color: black;
+}
+
+.search-bar.light-mode .search-box::placeholder{
+  color: white;
+}
+
+.search-bar .search-box{
+  color: black;
+}
+
+.search-bar.light-mode .search-box{
+  color: white;
+}
+
+.search-bar .search-button{
+border-left: solid black 1.5px;
+background-image: url("../images/icons/search\ icon.jpg");
+}
+
+.search-bar.light-mode .search-button{
+  border-left: solid rgba(255, 255, 255, 0.753) 1.5px;
+    background-image: url("../images/icons/search\ icon.png");
+}
+
+
+.sidebar{
+  background-color: rgb(50, 50, 50);
+  transition: background-color 1s ease;
+}
+
+.sidebar.light-mode{
+  background-color: rgb(50, 50, 50);
+}
+
+.sidebar.light-mode .sidebar-link p{
+  color: white;
+  transition: 0.3s ease;
+}
+
+.sidebar .sidebar-link p{
+  color: white;
+  transition: 0.3s ease;
+}
+
+      
+
+.dropdown-bar-container{
+  background-color: rgb(50, 50, 50);
+  color: white;
+}
+
+.dropdown-bar-container.light-mode{
+  background-color: rgb(50, 50, 50);
+  color: rgb(255, 149, 0);
+}
+
+
+
+body{
+  background-color: white;
+}
+
+body.light-mode{
+  background-color: rgb(77, 77, 77);
+}
+
+body ::selection {
+  background-color: rgba(0, 0, 0, 0.742);
+  color: white;
+}
+
+body.light-mode ::selection {
+  background-color: rgba(255, 255, 255, 0.742);
+  color: black;
+}
+
+body ::-moz-selection {
+  background-color: rgba(0, 0, 0, 0.742);
+  color: white;
+}
+
+body.light-mode ::-moz-selection {
+  background-color: rgba(255, 255, 255, 0.742);
+  color: black;
+}
+
+
+.current-weather-tile{
+  background-color: rgba(174, 174, 174, 0.25);
+  transition: background-color 1s ease;
+  color: black;
+}
+
+.current-weather-tile.light-mode{
+  background-color: rgba(23, 23, 23, 0.669);
+  color: white;
+}
+
+
+
+.contact-us {
+  color: black;
+}
+
+.contact-us.light-mode {
+  color: white;
+}
+
+.bottom-title {
+  color: black;
+}
+
+.bottom-title.light-mode {
+  color: white;
+}
+
+.textarea {
+  border: solid black 1.5px;
+  color: black;
+}
+
+.textarea.light-mode {
+  border: solid white 1.5px;
+  color: white;
+}
+
+.textarea::placeholder {
+  color: black;
+}
+
+.textarea.light-mode::placeholder {
+  color: white;
+}
+
+
+
+.about-us {
+  color: black;
+  transition: color 0.5s;
+}
+
+.about-us.light-mode {
+  color: white;
+  transition: color 0.5s;
+}
+
+.bottom-container {
+  background-color: rgb(167, 167, 167);
+}
+
+.bottom-container.light-mode {
+  background-color: rgb(49, 49, 49);
+}
+
+.bottom-container a, .bottom-container button{
+  color: black;
+}
+
+.bottom-container.light-mode a, .bottom-container.light-mode button{
+  color: white;
+}
+
+.footer{
+  background-color: rgb(167, 167, 167);
+  color: black;
+  transition: 0.35s;
+}
+
+.footer.light-mode{
+  background-color: rgb(49, 49, 49);
+  color: white;
+}
+
+.email-box {
+  border: 1px solid black;
+  color: black;
+}
+
+.email-box.light-mode {
+  border: solid black 1px;
+}
+
+.bottom-container .email-submit-button{
+  border: none;
+}
+
+.bottom-container .email-submit-button{
+  border: solid black 1px;  
+}
